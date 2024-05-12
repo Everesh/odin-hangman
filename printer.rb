@@ -1,9 +1,18 @@
 module Printer
     def print_state
-      puts_loading_bar
+      if state.any?(nil)
+        puts_loading_bar
+      else
+        puts 'Noooo, my loading!!! ░░░░░░░░░░░░░░░░░░░░░'
+      end
       prints_attpets_left
       puts_wrong_guesses
-      puts_sate
+      if attempts_left.zero?
+        key.each { |letter| print " #{letter} " }
+        puts
+      else
+        puts_sate
+      end
     end
   
     private
@@ -15,7 +24,7 @@ module Printer
         puts '████████████████████ DONE!'
         return
       end
-      
+
       case attempts_left * 100 / Hangman::ATTEMPTS
       when 90..100
         puts '█░░░░░░░░░░░░░░░░░░░'

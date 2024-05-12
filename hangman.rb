@@ -1,4 +1,7 @@
+require './printer'
+
 class Hangman
+  include Printer
 
   ATTEMPTS = 8
 
@@ -43,6 +46,6 @@ class Hangman
   end
 
   def already_guessed?(letter)
-    state.any? == letter || wrong_guesses.any? == letter
+    state.any?(letter) || wrong_guesses.any?(letter)
   end
 end

@@ -3,6 +3,8 @@ class Hangman
   ATTEMPTS = 8
 
   def initialize
+    raise 'Failed to initialize, dictionary.txt does not exist' unless File.exist?('./dictionary.txt')
+
     dictionary = File.readlines('./dictionary.txt')
     @key = dictionary[rand(dictionary.size)]
     @state = Array.new(key.size)
@@ -15,11 +17,9 @@ class Hangman
       letter = letter.downcase.chr
       raise StandardError unless letter.match(/[a-z]/)
     rescue StandardError
-      puts 'Invalid Input!'
-      return false
+      raise 'Invalid Input!'
     end
     evaluate(letter)
-    true
   end
 
   private

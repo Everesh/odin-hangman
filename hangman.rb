@@ -19,6 +19,21 @@ class Hangman
     @attempts_left = ATTEMPTS
   end
 
+  def play
+    initialize unless attempts_left.positive?
+    while attempts_left.positive?
+      print_state
+      print 'Soo, what are you thinking?: '
+      guess(gets)
+      self.attempts_left -= 1
+    end
+    if state.any?(nil)
+      puts 'Oh wow, you suck at this!'
+    else
+      puts 'The brain on you. Massive!'
+    end
+  end
+
   def guess(str)
     begin
       letter = str.downcase.chr

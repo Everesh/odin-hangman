@@ -11,8 +11,8 @@ class Hangman
   end
 
   def guess(letter)
-    letter = letter.downcase.char
     begin
+      letter = letter.downcase.chr
       raise StandardError unless letter.match(/[a-z]/)
     rescue StandardError
       puts 'Invalid Input!'

@@ -8,7 +8,7 @@ class Hangman
     raise 'Failed to initialize, dictionary.txt does not exist' unless File.exist?('./dictionary.txt')
 
     dictionary = File.readlines('./dictionary.txt')
-    @key = dictionary[rand(dictionary.size)].chomp
+    @key = dictionary[rand(dictionary.size)].chomp.split('')
     @state = Array.new(key.size)
     @wrong_guesses = []
     @attempts_left = ATTEMPTS
@@ -33,12 +33,12 @@ class Hangman
   def evaluate(letter)
     return false if already_guessed?(letter) || attempts_left < 1
 
-    found = false
-    key.each.with_index do |column, index|
-      state[index] = key[index] if column == key[index]
-      found = true
+    if key.any?(letter)
+      key.each.with_index { |column, index| state[index] = letter if column == letter }
+    else
+      wrong_guesses.push(letter)
     end
-    wrong_guesses.push(letter) unless found
+    self.attempts_left -= 1
     true
   end
 

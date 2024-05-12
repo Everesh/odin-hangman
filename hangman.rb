@@ -3,7 +3,7 @@ require './printer'
 class Hangman
   include Printer
 
-  ATTEMPTS = 8
+  ATTEMPTS = 20
 
   attr_reader :state, :wrong_guesses, :attempts_left
 
@@ -21,11 +21,13 @@ class Hangman
 
   def play
     initialize unless attempts_left.positive?
+    print_state
     while attempts_left.positive?
-      print_state
+      break unless state.any?(nil)
+
       print 'Soo, what are you thinking?: '
       guess(gets)
-      self.attempts_left -= 1
+      print_state
     end
     if state.any?(nil)
       puts 'Oh wow, you suck at this!'

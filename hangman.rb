@@ -8,7 +8,7 @@ class Hangman
     raise 'Failed to initialize, dictionary.txt does not exist' unless File.exist?('./dictionary.txt')
 
     dictionary = File.readlines('./dictionary.txt')
-    @key = dictionary[rand(dictionary.size)]
+    @key = dictionary[rand(dictionary.size)].chomp
     @state = Array.new(key.size)
     @wrong_guesses = []
     @attempts_left = ATTEMPTS

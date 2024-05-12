@@ -3,7 +3,7 @@ require './printer'
 class Hangman
   include Printer
 
-  ATTEMPTS = 20
+  ATTEMPTS = 8
 
   attr_reader :state, :wrong_guesses, :attempts_left
 
@@ -59,8 +59,8 @@ class Hangman
       key.each.with_index { |column, index| state[index] = letter if column == letter }
     else
       wrong_guesses.push(letter)
+      self.attempts_left -= 1
     end
-    self.attempts_left -= 1
     true
   end
 

@@ -1,6 +1,8 @@
 module Printer
     def print_state
-      if state.any?(nil)
+      if attempts_left.zero?
+        puts 'Loading your doom... ████████████████████ DONE!'
+      elsif state.any?(nil)
         puts_loading_bar
       else
         puts 'Noooo, my loading!!! ░░░░░░░░░░░░░░░░░░░░░'
@@ -19,11 +21,6 @@ module Printer
   
     def puts_loading_bar
       print 'Loading your doom... '
-  
-      if attempts_left.zero?
-        puts '████████████████████ DONE!'
-        return
-      end
 
       case attempts_left * 100 / Hangman::ATTEMPTS
       when 90..100

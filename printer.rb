@@ -1,5 +1,6 @@
 module Printer
   def print_state
+    puts # New line, new me. God the formathing is aweful on this one
     if attempts_left.zero?
       puts 'Loading your doom... ████████████████████ DONE!'
     elsif state.any?(nil)
